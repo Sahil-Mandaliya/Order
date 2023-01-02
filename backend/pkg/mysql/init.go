@@ -1,6 +1,8 @@
 package mysql
 
 import (
+	"log"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -16,35 +18,10 @@ func InitDB() error {
 		return err
 	}
 	db = gdb
+	log.Println("Database initialised successfully")
 	return nil
 }
 
 func DBConnection() *gorm.DB {
 	return db
 }
-
-// package mysql
-
-// import (
-// 	"database/sql"
-// 	"log"
-
-// 	_ "github.com/go-sql-driver/mysql"
-// )
-
-// // Db configuration
-// var db *sql.DB
-// var err error
-
-// func InitDB() {
-// 	db, err = sql.Open("mysql",
-// 		"root:@tcp(127.0.0.1:3306)/userdb")
-// 	if err != nil {
-// 		panic(err.Error())
-// 	}
-// 	log.Println("Database initialised successfully")
-// }
-
-// func DBConnection() *sql.DB {
-// 	return db
-// }

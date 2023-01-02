@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	mysqlDb "github.com/Sahil-Mandaliya/Order/backend/pkg/mysql"
 	routes "github.com/Sahil-Mandaliya/Order/backend/routes"
 
@@ -9,7 +11,12 @@ import (
 
 func main() {
 	mysqlDb.InitDB()
-	defer mysqlDb.DBConnection().Close()
+	connection := mysqlDb.DBConnection()
+	db, err := connection.DB()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer db.Close()
 	routes.Routers()
 }
 
